@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 500px;
+            background-color: black;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 300px;
+       
+        }
+        .input-container {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        #texto-do-usuario {
+            flex: 1;
+            padding: 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        li input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .delete-button {
+            margin-left: auto;
+            background-color: transparent;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 12px;
+        }
+        button:hover{
+            background-color: red;
+            transition: 0.5s ease;
+        }
+    </style>
+    <script>
+        let indiceDaLista = 0;
+
+
+        function adicionarItem() {
+            const inputUsuario = document.getElementById('texto-do-usuario');
+            const textoDigitado = inputUsuario.value.trim();
+
+
+            if (textoDigitado === "") {
+                return;
+            }
+
+
+            inputUsuario.value = '';
+
+
+            const lista = document.getElementById('lista');
+
+
+            lista.innerHTML += `
+            <li id="item-${indiceDaLista}">
+                <input type="checkbox" name="item-${indiceDaLista}" id="checkbox-${indiceDaLista}">
+                <label for="checkbox-${indiceDaLista}">${textoDigitado}</label>
+                <button class="delete-button" onclick="removerItem(${indiceDaLista})">Excluir</button>
+            </li>
+            `;
+
+
+            indiceDaLista++;
+        }
+
+
+        function removerItem(indice) {
+            const item = document.getElementById(`item-${indice}`);
+            if (item) {
+                item.remove();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="input-container">
+            <input type="text" id="texto-do-usuario" placeholder="Escreva seu item aqui">
+            <button onclick="adicionarItem()">Add item</button>
+        </div>
+        <ul id="lista"></ul>
+    </div>
+</body>
+</html>
+
+
+
